@@ -1,0 +1,802 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     33050,        794]
+NotebookOptionsPosition[     29680,        738]
+NotebookOutlinePosition[     30120,        755]
+CellTagsIndexPosition[     30077,        752]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Proyecto: ", "Subchapter",
+ CellChangeTimes->{{3.749301362458724*^9, 3.7493013761003184`*^9}, {
+  3.845545378275502*^9, 3.8455453880605307`*^9}, {3.8770174045953674`*^9, 
+  3.877017416786464*^9}, {3.9713471859012413`*^9, 3.97134718599736*^9}, {
+  3.971347970841517*^9, 
+  3.971347974430439*^9}},ExpressionUUID->"3b1f367c-6c06-4005-aab2-\
+c374ff87a718"],
+
+Cell["\<\
+1. Considere el c\[OAcute]digo \[OpenCurlyDoubleQuote]Simulaci\[OAcute]n Sin \
+fila\[CloseCurlyDoubleQuote], modifique e implemente en Python de forma que \
+los TI y los TA se generan de forma pseudoaleatoria, El TMax debe ser m\
+\[IAcute]nimo 1000,  resuelva las preguntas que se muestran al final del c\
+\[OAcute]digo y adem\[AAcute]s plantee 3 preguntas similares se puedan \
+resolver usando c\[OAcute]digo. 
+2. Considere el c\[OAcute]digo \[OpenCurlyDoubleQuote]Simulaci\[OAcute]n Con \
+fila\[CloseCurlyDoubleQuote], modifique e implemente en Python de forma que \
+los TI y los TA se generan de forma pseudoaleatoria, El TMax debe ser m\
+\[IAcute]nimo 1200,  resuelva las preguntas que se muestran al final del c\
+\[OAcute]digo y adem\[AAcute]s plantee 3 preguntas similares se puedan \
+resolver usando c\[OAcute]digo. \
+\>", "Text",
+ CellChangeTimes->{{3.8770174456468334`*^9, 3.877017517676337*^9}, {
+  3.8770176055363894`*^9, 3.877017615359109*^9}, {3.8770176495828557`*^9, 
+  3.877017654655732*^9}, {3.87701769265042*^9, 3.8770177744533887`*^9}, {
+  3.877017821001416*^9, 3.877018045386077*^9}, {3.9078397367697077`*^9, 
+  3.9078397494362535`*^9}, {3.9078637871412363`*^9, 3.907863787495758*^9}, {
+  3.9078638361644173`*^9, 3.9078638793041153`*^9}, {3.9090694726096015`*^9, 
+  3.9090694891661777`*^9}, {3.9090695801235933`*^9, 3.909069791657551*^9}, {
+  3.9090698488476667`*^9, 3.909069853502282*^9}, {3.971347171888197*^9, 
+  3.971347425089569*^9}, {3.971347608623973*^9, 3.971347634263566*^9}, {
+  3.971347969479245*^9, 
+  3.971347987195776*^9}},ExpressionUUID->"26d71237-a34b-4d0c-8e2e-\
+b0d02b8332da"],
+
+Cell[CellGroupData[{
+
+Cell["Simulaci\[OAcute]n. Sin fila. ", "Section",
+ CellChangeTimes->{{3.877017419490585*^9, 
+  3.877017424934667*^9}},ExpressionUUID->"f064f51c-88a4-4b45-bf35-\
+b3628ca16e60"],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Suponga que en un sistema de aduanas el pasajero es revisado solamente el \
+aforador (\[UAcute]nico) est\[AAcute] desocupado. En caso contrario, el \
+pasajero se da por atendido y se marcha sin problemas, es decir, nunca se \
+hace fila.\
+\>", "Subsection",
+ CellChangeTimes->{{3.7493014069503098`*^9, 3.749301481624297*^9}, {
+  3.749302137643075*^9, 
+  3.7493021441710525`*^9}},ExpressionUUID->"a5aacd7f-b0cd-45f1-b79e-\
+58c90f8a38c4"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"TI", "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "4", ",", "3", ",", "2", ",", "2", ",", "5", ",", "1", ",", "3"}], 
+     "}"}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Tiempos", " ", "entre", " ", "llegadas", " ", "en", " ", "minutos"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TA", "=", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "3", ",", "2", ",", "5", ",", "1", ",", "2"}], "}"}]}],
+    ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Tiempos", " ", "de", " ", "atenci\[OAcute]n", " ", "en", " ", "minutos"}],
+    "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TM", "=", "0"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Tiempo", " ", "del", " ", "modelo"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TMax", "=", "16"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{
+   "Tiempo", " ", "m\[AAcute]ximo", " ", "de", " ", "simulaci\[OAcute]n"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"llegada", "=", "4"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"salida", " ", "=", " ", "\[Infinity]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pasajero", "=", "1"}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Contador", " ", "de", " ", "pasajeros"}], "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"desocupado", "=", "True"}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Estado", " ", "del", " ", "aforador"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ts", "=", "1"}], ";"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "contador", " ", "para", " ", "el", " ", "tiempo", " ", "de", " ", 
+    "atenci\[OAcute]n"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"pasajeroSiendoAtendido", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  StyleBox[
+   RowBox[{
+    RowBox[{"evento", "=", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"\"\<Evento\>\"", ",", "\"\<#pasajero\>\"", ",", "\"\<TM\>\"", 
+        ",", "\"\<Revisi\[OAcute]n\>\""}], "}"}], "}"}]}], ";"}],
+   Background->RGBColor[0.94, 0.91, 0.88]], 
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{"Lista", " ", "para", " ", "guardar", " ", "eventos"}], "*)"}],
+   Background->RGBColor[0.94, 0.91, 0.88]], "\[IndentingNewLine]", 
+  "\[IndentingNewLine]", 
+  RowBox[{"(*", 
+   RowBox[{"Iniciamos", " ", "la", " ", "simulaci\[OAcute]n"}], 
+   "*)"}]}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{
+  3.749834015259533*^9, {3.7498341460553274`*^9, 3.749834225328454*^9}, {
+   3.7498343258323903`*^9, 3.7498344418305855`*^9}, {3.749834477413156*^9, 
+   3.7498346305594664`*^9}, {3.7498347307833457`*^9, 
+   3.7498349791696367`*^9}, {3.749842329710908*^9, 3.7498423298338327`*^9}, {
+   3.7498427067768545`*^9, 3.749842707132636*^9}, {3.7498432204209323`*^9, 
+   3.749843220843672*^9}, {3.749917813282404*^9, 3.749917844364532*^9}, {
+   3.749919977952615*^9, 3.749919978438025*^9}, {3.749920289657819*^9, 
+   3.749920384244934*^9}, {3.749920447284581*^9, 3.74992045770277*^9}, {
+   3.749920585104937*^9, 3.749920589045353*^9}, {3.749921246666491*^9, 
+   3.749921247184185*^9}, {3.8455459284863567`*^9, 3.8455459311449804`*^9}, {
+   3.8455460498287506`*^9, 3.8455460549924293`*^9}, {3.8455464346452117`*^9, 
+   3.845546443595765*^9}, 3.8455465239269843`*^9, {3.8455660529827986`*^9, 
+   3.8455660884025574`*^9}},
+ CellLabel->"In[16]:=",ExpressionUUID->"f46356f8-dbb9-4aa7-b134-6a3870519328"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"TM", "\[LessEqual]", " ", "TMax"}], ",", " ", 
+    RowBox[{"(*", 
+     RowBox[{"Proceso", " ", "mientras", " ", "haya", " ", "tiempo"}], "*)"}],
+     "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"llegada", "<", "salida"}], ",", " ", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Proceso", " ", "una", " ", "llegada"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"TM", "=", "llegada"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<Llega el pasajero \>\"", ",", " ", "pasajero", ",", 
+          " ", "\"\< al minuto \>\"", ",", " ", "TM"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{"desocupado", ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{"Revisamos", " ", "al", " ", "pasajero"}], "*)"}], 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"desocupado", "=", "False"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"salida", "=", 
+            RowBox[{"TM", "+", 
+             RowBox[{"TA", "[", 
+              RowBox[{"[", "ts", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"ts", "++"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"pasajeroSiendoAtendido", "=", "pasajero"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Print", "[", 
+            
+            RowBox[{"\"\<Revisamos al pasajero \>\"", ",", " ", 
+             "pasajeroSiendoAtendido"}], " ", "]"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"Ingresando", " ", "un", " ", "evento"}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"eventoAux", "=", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Entrada\>\"", ",", "pasajeroSiendoAtendido", ",", 
+              "TM", ",", "\"\<Rev\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"evento", "=", 
+            RowBox[{"Join", "[", 
+             RowBox[{"evento", ",", 
+              RowBox[{"{", "eventoAux", "}"}]}], "]"}]}], ";"}], 
+          "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "El", " ", "pasajero", " ", "pasa", " ", "sin", " ", "ser", " ", 
+            "revisado"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Print", "[", 
+            
+            RowBox[{"\"\<El pasajero \>\"", ",", "pasajero", ",", 
+             " ", "\"\< pasa sin ser revisado\>\""}], " ", "]"}], ";", 
+           "\[IndentingNewLine]", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{"Ingresando", " ", "un", " ", "evento"}], "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"eventoAux", "=", 
+            RowBox[{"{", 
+             
+             RowBox[{"\"\<Entr\[OAcute] y sali\[OAcute]\>\"", ",", "pasajero",
+               ",", "TM", ",", "\"\<No Rev\>\""}], "}"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"evento", "=", 
+            RowBox[{"Join", "[", 
+             RowBox[{"evento", ",", 
+              RowBox[{"{", "eventoAux", "}"}]}], "]"}]}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ";", 
+        RowBox[{"(*", 
+         RowBox[{"Fin", " ", "If", " ", "desocupado"}], "*)"}], " ", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Debemos", " ", "planificar", " ", "la", " ", "pr\[OAcute]xima", " ",
+           "llegada"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"pasajero", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"llegada", "=", 
+         RowBox[{"TM", "+", 
+          RowBox[{"TI", "[", 
+           RowBox[{"[", "pasajero", "]"}], "]"}]}]}], ";"}], 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Proceso", " ", "una", " ", "salida"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"TM", "=", "salida"}], ";", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<Sale el pasajero \>\"", ",", " ", 
+          "pasajeroSiendoAtendido", ",", " ", "\"\< en el Min \>\"", ",", " ",
+           "TM"}], "]"}], ";", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"Ingresando", " ", "un", " ", "evento"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"eventoAux", "=", 
+         RowBox[{"{", 
+          
+          RowBox[{"\"\<Salida\>\"", ",", "pasajeroSiendoAtendido", ",", "TM", 
+           ",", "\"\<Rev\>\""}], "}"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"evento", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"evento", ",", 
+           RowBox[{"{", "eventoAux", "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", "\[IndentingNewLine]", 
+        RowBox[{"desocupado", "=", "True"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"salida", "=", "\[Infinity]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], 
+     RowBox[{"(*", 
+      RowBox[{"Fin", " ", "de", " ", "If"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{
+     "Input", "[", "\"\<D\[EAcute] enter para continuar\>\"", "]"}]}]}], 
+   RowBox[{"(*", 
+    RowBox[{
+    "Esta", " ", "instrucci\[OAcute]n", " ", "la", " ", "usamos", " ", "para",
+      " ", "poder", " ", "ir", " ", "revisando", " ", "el", " ", 
+     "c\[OAcute]digo", " ", "sin", " ", "que", " ", "se", " ", 
+     RowBox[{"encicle", ".", " ", "Si"}], " ", "se", " ", "encicla", " ", 
+     "salimos", " ", "del", " ", "Kernel"}], "*)"}], "\[IndentingNewLine]", 
+   "]"}], 
+  RowBox[{"(*", 
+   RowBox[{"Fin", " ", "de", " ", "While"}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.749834985709818*^9, 3.749834995674678*^9}, {
+   3.7498350909847755`*^9, 3.749835153457903*^9}, {3.7498357157048006`*^9, 
+   3.74983574512667*^9}, {3.74983580984879*^9, 3.7498358438315487`*^9}, {
+   3.7498359087100887`*^9, 3.7498359274065905`*^9}, {3.749835968292596*^9, 
+   3.749836009589478*^9}, {3.7498360484430437`*^9, 3.7498360767227197`*^9}, {
+   3.7498361157576675`*^9, 3.7498361316825156`*^9}, {3.7498361843117075`*^9, 
+   3.749836190840684*^9}, {3.749836252248746*^9, 3.7498362802994623`*^9}, {
+   3.749836317428628*^9, 3.74983632839487*^9}, 3.7498364382262554`*^9, {
+   3.7498364691783133`*^9, 3.749836601020521*^9}, {3.7498419481390233`*^9, 
+   3.749841966548281*^9}, {3.7498420020523653`*^9, 3.7498420218352346`*^9}, {
+   3.7498420831830034`*^9, 3.7498421015214386`*^9}, 3.749842308850768*^9, {
+   3.7498425588097444`*^9, 3.749842589903263*^9}, {3.7498426286249533`*^9, 
+   3.7498426346012683`*^9}, {3.7498429430381927`*^9, 3.749842944699171*^9}, {
+   3.74984328162976*^9, 3.7498433019902143`*^9}, {3.7498433510379925`*^9, 
+   3.7498433780713353`*^9}, 3.749917870138439*^9, 3.749919081608152*^9, 
+   3.749919675153586*^9, {3.7499199946839933`*^9, 3.749919997413927*^9}, {
+   3.749920744604162*^9, 3.749920749445249*^9}, {3.749920787471189*^9, 
+   3.749921020773315*^9}, {3.749921054817281*^9, 3.749921221199477*^9}, {
+   3.8134980097418756`*^9, 3.813498027778162*^9}, {3.8134983961721344`*^9, 
+   3.813498433188125*^9}, {3.8455454418484926`*^9, 3.845545486942777*^9}, {
+   3.845546069588433*^9, 3.845546091138137*^9}, {3.8455461220459375`*^9, 
+   3.845546147369624*^9}, {3.8455466508871975`*^9, 3.845546656660762*^9}, {
+   3.8455467321148024`*^9, 3.8455467390205936`*^9}, {3.845546798730545*^9, 
+   3.845546801844797*^9}, {3.8455469338152843`*^9, 3.8455469353988633`*^9}, {
+   3.845547053123771*^9, 3.8455470667766204`*^9}, {3.8455662200835686`*^9, 
+   3.845566222426649*^9}, {3.8455662912803617`*^9, 3.8455663152777195`*^9}, {
+   3.845566412135105*^9, 3.845566414132352*^9}, {3.845566463333782*^9, 
+   3.8455664651118946`*^9}, {3.8455665123588467`*^9, 3.845566514096674*^9}},
+ CellLabel->"In[27]:=",ExpressionUUID->"c04bc872-34fb-4b3f-ab09-44b6f4829251"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "4"}],
+  SequenceForm["Llega el pasajero ", 1, " al minuto ", 4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450177896986*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"8e3e007b-19a5-5d49-aca9-44296eb18bd3"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Revisamos al pasajero \"\>", "\[InvisibleSpace]", "1"}],
+  SequenceForm["Revisamos al pasajero ", 1],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9714501779173927`*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"56e81335-7e0e-4d4e-8284-25d001ea746d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Sale el pasajero \"\>", "\[InvisibleSpace]", "1", 
+   "\[InvisibleSpace]", "\<\" en el Min \"\>", "\[InvisibleSpace]", "5"}],
+  SequenceForm["Sale el pasajero ", 1, " en el Min ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9714501835385494`*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"38ac58e5-e3a0-1842-84f1-9f26009fd563"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "7"}],
+  SequenceForm["Llega el pasajero ", 2, " al minuto ", 7],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9714501872202396`*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"fc9b187e-eded-5f41-a3c4-1fb8f93586f0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Revisamos al pasajero \"\>", "\[InvisibleSpace]", "2"}],
+  SequenceForm["Revisamos al pasajero ", 2],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.97145018722822*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"26534bd3-d82b-2a40-9b5c-50f13dbbdd39"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "9"}],
+  SequenceForm["Llega el pasajero ", 3, " al minuto ", 9],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.97145018850181*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"0a20dcab-826c-b246-80b7-1d01b1f52bd0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"El pasajero \"\>", "\[InvisibleSpace]", "3", 
+   "\[InvisibleSpace]", "\<\" pasa sin ser revisado\"\>"}],
+  SequenceForm["El pasajero ", 3, " pasa sin ser revisado"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450188509527*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"63549977-2ec6-704d-97e7-125a49f3ff67"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Sale el pasajero \"\>", "\[InvisibleSpace]", "2", 
+   "\[InvisibleSpace]", "\<\" en el Min \"\>", "\[InvisibleSpace]", "10"}],
+  SequenceForm["Sale el pasajero ", 2, " en el Min ", 10],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450189609215*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"5e5ea775-bdc1-7749-8698-57f2ddbc5d34"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "11"}],
+  SequenceForm["Llega el pasajero ", 4, " al minuto ", 11],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450190805073*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"47d697dc-4c51-ef4f-a324-4a884bdaf72f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Revisamos al pasajero \"\>", "\[InvisibleSpace]", "4"}],
+  SequenceForm["Revisamos al pasajero ", 4],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450190813366*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"b08967b2-5bf0-e049-8591-09ee1729f3f5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Sale el pasajero \"\>", "\[InvisibleSpace]", "4", 
+   "\[InvisibleSpace]", "\<\" en el Min \"\>", "\[InvisibleSpace]", "13"}],
+  SequenceForm["Sale el pasajero ", 4, " en el Min ", 13],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9714501919351597`*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"2ad4d3a3-8e2e-7a4a-8693-62f524e4bed0"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "5", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "16"}],
+  SequenceForm["Llega el pasajero ", 5, " al minuto ", 16],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450192984064*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"19d958a1-2f2c-6b44-84c5-907e28b3284c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Revisamos al pasajero \"\>", "\[InvisibleSpace]", "5"}],
+  SequenceForm["Revisamos al pasajero ", 5],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450192997328*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"a5cab3d7-8035-f148-bbf6-58450fd01604"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Llega el pasajero \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\" al minuto \"\>", "\[InvisibleSpace]", "17"}],
+  SequenceForm["Llega el pasajero ", 6, " al minuto ", 17],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.971450194053232*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"b80dfa8a-60c7-f240-9094-cbc428856499"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"El pasajero \"\>", "\[InvisibleSpace]", "6", 
+   "\[InvisibleSpace]", "\<\" pasa sin ser revisado\"\>"}],
+  SequenceForm["El pasajero ", 6, " pasa sin ser revisado"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.9714501940577526`*^9},
+ CellLabel->
+  "Durante la evaluaci\[OAcute]n de \
+In[27]:=",ExpressionUUID->"4b2f385b-73d7-5046-8ac6-59733f3e58fe"]
+}, Open  ]]
+}, Open  ]],
+
+Cell["\[DownQuestion]Cu\[AAcute]les pasajeros se fueron atendidos?", \
+"Subsubsection",
+ CellChangeTimes->{{3.813498278912657*^9, 3.813498285973321*^9}, {
+  3.9713475233062696`*^9, 3.9713475244765863`*^9}, {3.971348047979463*^9, 
+  3.971348049473441*^9}},ExpressionUUID->"dee69fbb-fad3-4df7-b21c-\
+b7ee772e24c0"],
+
+Cell["\[DownQuestion]Cu\[AAcute]nto tiempo estuvo el aforador desocupado?", \
+"Subsubsection",
+ CellChangeTimes->{{3.8134986652216687`*^9, 3.813498679597469*^9}, {
+   3.814099657562299*^9, 3.8140996609810104`*^9}, 3.8770143789384756`*^9, 
+   3.9713474393267393`*^9},ExpressionUUID->"4d7f1858-499a-4231-96cd-\
+4f8c3818518a"],
+
+Cell["\[DownQuestion]Cu\[AAcute]les pasajeros llegaron en un minuto impar?", \
+"Subsubsection",
+ CellChangeTimes->{{3.971347545424012*^9, 
+  3.97134758090664*^9}},ExpressionUUID->"27a6dd7d-6406-496c-9e39-\
+487a4df7ec67"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Simulaci\[OAcute]n. Con fila. ", "Section",
+ CellChangeTimes->{{3.7819785787036576`*^9, 3.7819785943652544`*^9}, {
+  3.971347459968746*^9, 
+  3.97134746221408*^9}},ExpressionUUID->"06b6d77c-fd4c-49be-b5db-\
+a57e02eea299"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TM", "=", "0"}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Tiempo", " ", "del", " ", "modelo", " ", "en", " ", "minutos"}], 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"n", "=", "1500"}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TMax", "=", 
+    RowBox[{"60", "*", "60"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"c", "=", "5"}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TI", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"1", "+", 
+       RowBox[{"Mod", "[", 
+        RowBox[{
+         RowBox[{"Fibonacci", "[", "i", "]"}], ",", "8"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Tiempos", " ", "entre", " ", 
+    RowBox[{"pasajeros", ":", "interarrivo"}]}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TA", "=", 
+    RowBox[{"Table", "[", 
+     RowBox[{
+      RowBox[{"5", "+", 
+       RowBox[{"Mod", "[", 
+        RowBox[{
+         RowBox[{"Prime", "[", "i", "]"}], ",", "10"}], "]"}]}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "n"}], "}"}]}], "]"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Tiempos", " ", "de", " ", "atenci\[OAcute]n"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pasajero", "=", "1"}], ";"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ocupado", "=", "False"}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Status", " ", "del", " ", "aforador"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"llegada", "=", 
+    RowBox[{"TI", "[", 
+     RowBox[{"[", "1", "]"}], "]"}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"salida", "=", "\[Infinity]"}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ta", "=", "1"}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{
+   "Contador", " ", "para", " ", "tiempos", " ", "de", " ", 
+    "atenci\[OAcute]n"}], "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"eventos", "=", 
+    RowBox[{"{", "}"}]}], ";"}], 
+  RowBox[{"(*", 
+   RowBox[{"Mi", " ", "lista", " ", "de", " ", "eventos"}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{"Un", " ", "evento", " ", "es", " ", "un", " ", 
+    RowBox[{"{", 
+     RowBox[{"pasajero", ",", "llegada", ",", "salida"}], "}"}]}], 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.78197864237702*^9, 3.7819786904068227`*^9}, 
+   3.781978804129877*^9, {3.781979267763876*^9, 3.781979280182126*^9}, {
+   3.7819793429315157`*^9, 3.78197937468612*^9}, {3.7819794885624948`*^9, 
+   3.7819794891753273`*^9}, 3.8141013160706797`*^9, 
+   3.8141019831480412`*^9},ExpressionUUID->"80b36ec2-9aed-4811-8a4b-\
+5537733f0140"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"While", "[", 
+   RowBox[{
+    RowBox[{"TM", "\[LessEqual]", "TMax"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"llegada", "<", "salida"}], ",", 
+       RowBox[{"(*", 
+        RowBox[{"Procesamos", " ", "una", " ", "llegada"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"TM", "=", "llegada"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Print", "[", 
+           
+           RowBox[{"\"\<Lleg\[OAcute] el pasajero \>\"", ",", "pasajero", 
+            ",", "\"\< en el Min. \>\"", ",", "llegada"}], "]"}], ";"}], 
+         "*)"}], 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"\[Not]", "ocupado"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "El", " ", "aforador", " ", "est\[AAcute]", " ", "desocupado"}], 
+           "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"ocupado", "=", "True"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"salida", "=", 
+            RowBox[{"TM", "+", 
+             RowBox[{"TA", "[", 
+              RowBox[{"[", "ta", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"ta", "++"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", 
+            RowBox[{
+             RowBox[{"Print", "[", 
+              RowBox[{"\"\<Atendiendo al pasajero \>\"", ",", 
+               RowBox[{"pasajerosiendoatendido", "=", "pasajero"}]}], "]"}], 
+             ";"}], "*)"}], 
+           RowBox[{"evento", "=", 
+            RowBox[{"{", 
+             RowBox[{"pasajero", ",", "llegada", ",", "salida"}], "}"}]}], 
+           ";"}], ",", 
+          RowBox[{"(*", 
+           RowBox[{
+           "El", " ", "aforador", " ", "est\[AAcute]", " ", "ocupado"}], 
+           "*)"}], 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{"Print", "[", 
+             
+             RowBox[{"\"\<El pasajero \>\"", ",", "pasajero", 
+              ",", "\"\< no es revisado\>\""}], "]"}], ";", 
+            "\[IndentingNewLine]", 
+            RowBox[{"evento", "=", 
+             RowBox[{"{", 
+              RowBox[{"pasajero", ",", "llegada", ",", "llegada"}], "}"}]}], 
+            ";"}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"evento", "=", 
+            RowBox[{"{", 
+             RowBox[{"pasajero", ",", "llegada", ",", "llegada"}], "}"}]}], 
+           ";"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+         "Programamos", " ", "la", " ", "llegada", " ", "del", " ", 
+          "pr\[OAcute]ximo", " ", "pasajero"}], "*)"}], 
+        RowBox[{"eventos", "=", 
+         RowBox[{"Join", "[", 
+          RowBox[{"eventos", ",", 
+           RowBox[{"{", "evento", "}"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"pasajero", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"llegada", "=", 
+         RowBox[{"TM", "+", 
+          RowBox[{"TI", "[", 
+           RowBox[{"[", "pasajero", "]"}], "]"}]}]}], ";"}], ",", 
+       RowBox[{"(*", 
+        RowBox[{"Procesamos", " ", "una", " ", "salida"}], "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"TM", "=", "salida"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"Print", "[", 
+           
+           RowBox[{"\"\<Sale el pasajero \>\"", ",", "pasajerosiendoatendido",
+             ",", "\"\< en el minuto \>\"", ",", "TM"}], "]"}], ";"}], "*)"}], 
+        RowBox[{"ocupado", "=", "False"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"salida", "=", "\[Infinity]"}], ";"}]}], "]"}], ";"}]}], 
+   "]"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Fin", " ", "del", " ", "Tiempo", " ", "de", " ", 
+    RowBox[{"Sim", "."}]}], "*)"}]}]], "Input",
+ CellChangeTimes->{{3.7819787537707825`*^9, 3.7819787829596324`*^9}, 
+   3.8141013284810123`*^9},ExpressionUUID->"d8a006b3-8b73-41fb-9dfb-\
+a120a44a97e0"],
+
+Cell[BoxData["eventos"], "Input",
+ CellChangeTimes->{{3.8141013696080914`*^9, 
+  3.814101384885522*^9}},ExpressionUUID->"d3b8654d-43a0-4617-88c2-\
+c3df12f773d4"],
+
+Cell["\<\
+Soluci\[OAcute]n : Encontrar los tiempos, luego los sumo y los divido por la \
+cantidad de tiempos en total.\
+\>", "Text",
+ CellChangeTimes->{{3.8141016143461514`*^9, 
+  3.8141016715942736`*^9}},ExpressionUUID->"6a885f89-21dc-47ea-abe4-\
+9eed598a72f7"],
+
+Cell["\<\
+\[DownQuestion]Cu\[AAcute]ntos pasajeros no fueron atendidos?
+\[DownQuestion]Cu\[AAcute]ntos pasajeros entraron y salieron en un minuto \
+impar?
+\[DownQuestion]Cu\[AAcute]ntos pasajeros atendidos entraron y salieron en un \
+minuto impar? \
+\>", "Subsubsection",
+ CellChangeTimes->{{3.8770148020109496`*^9, 3.8770148311162834`*^9}, {
+  3.9713480179964447`*^9, 
+  3.9713480221639357`*^9}},ExpressionUUID->"f17c7da2-1553-419b-bfab-\
+b8431746765e"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1440, 741.75},
+WindowMargins->{{Automatic, 1018.5}, {Automatic, -103.5}},
+Magnification:>0.9 Inherited,
+FrontEndVersion->"14.3 para Microsoft Windows (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"229fecf1-b5f0-4896-9476-3f37cdea3ebd"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 358, 6, 56, "Subchapter",ExpressionUUID->"3b1f367c-6c06-4005-aab2-c374ff87a718"],
+Cell[937, 30, 1623, 25, 207, "Text",ExpressionUUID->"26d71237-a34b-4d0c-8e2e-b0d02b8332da"],
+Cell[CellGroupData[{
+Cell[2585, 59, 175, 3, 59, "Section",ExpressionUUID->"f064f51c-88a4-4b45-bf35-b3628ca16e60"],
+Cell[CellGroupData[{
+Cell[2785, 66, 445, 9, 141, "Subsection",ExpressionUUID->"a5aacd7f-b0cd-45f1-b79e-58c90f8a38c4"],
+Cell[3233, 77, 3488, 89, 314, "Input",ExpressionUUID->"f46356f8-dbb9-4aa7-b134-6a3870519328"],
+Cell[CellGroupData[{
+Cell[6746, 170, 7973, 158, 935, "Input",ExpressionUUID->"c04bc872-34fb-4b3f-ab09-44b6f4829251"],
+Cell[CellGroupData[{
+Cell[14744, 332, 423, 9, 19, "Print",ExpressionUUID->"8e3e007b-19a5-5d49-aca9-44296eb18bd3"],
+Cell[15170, 343, 341, 8, 19, "Print",ExpressionUUID->"56e81335-7e0e-4d4e-8284-25d001ea746d"],
+Cell[15514, 353, 423, 9, 19, "Print",ExpressionUUID->"38ac58e5-e3a0-1842-84f1-9f26009fd563"],
+Cell[15940, 364, 425, 9, 19, "Print",ExpressionUUID->"fc9b187e-eded-5f41-a3c4-1fb8f93586f0"],
+Cell[16368, 375, 338, 8, 19, "Print",ExpressionUUID->"26534bd3-d82b-2a40-9b5c-50f13dbbdd39"],
+Cell[16709, 385, 422, 9, 19, "Print",ExpressionUUID->"0a20dcab-826c-b246-80b7-1d01b1f52bd0"],
+Cell[17134, 396, 404, 9, 19, "Print",ExpressionUUID->"63549977-2ec6-704d-97e7-125a49f3ff67"],
+Cell[17541, 407, 423, 9, 19, "Print",ExpressionUUID->"5e5ea775-bdc1-7749-8698-57f2ddbc5d34"],
+Cell[17967, 418, 425, 9, 19, "Print",ExpressionUUID->"47d697dc-4c51-ef4f-a324-4a884bdaf72f"],
+Cell[18395, 429, 339, 8, 19, "Print",ExpressionUUID->"b08967b2-5bf0-e049-8591-09ee1729f3f5"],
+Cell[18737, 439, 425, 9, 19, "Print",ExpressionUUID->"2ad4d3a3-8e2e-7a4a-8693-62f524e4bed0"],
+Cell[19165, 450, 425, 9, 19, "Print",ExpressionUUID->"19d958a1-2f2c-6b44-84c5-907e28b3284c"],
+Cell[19593, 461, 339, 8, 19, "Print",ExpressionUUID->"a5cab3d7-8035-f148-bbf6-58450fd01604"],
+Cell[19935, 471, 425, 9, 19, "Print",ExpressionUUID->"b80dfa8a-60c7-f240-9094-cbc428856499"],
+Cell[20363, 482, 406, 9, 19, "Print",ExpressionUUID->"4b2f385b-73d7-5046-8ac6-59733f3e58fe"]
+}, Open  ]]
+}, Open  ]],
+Cell[20796, 495, 312, 5, 39, "Subsubsection",ExpressionUUID->"dee69fbb-fad3-4df7-b21c-b7ee772e24c0"],
+Cell[21111, 502, 323, 5, 32, "Subsubsection",ExpressionUUID->"4d7f1858-499a-4231-96cd-4f8c3818518a"],
+Cell[21437, 509, 220, 4, 32, "Subsubsection",ExpressionUUID->"27a6dd7d-6406-496c-9e39-487a4df7ec67"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21706, 519, 227, 4, 59, "Section",ExpressionUUID->"06b6d77c-fd4c-49be-b5db-a57e02eea299"],
+Cell[21936, 525, 2853, 84, 409, "Input",ExpressionUUID->"80b36ec2-9aed-4811-8a4b-5537733f0140"],
+Cell[24792, 611, 3974, 98, 524, "Input",ExpressionUUID->"d8a006b3-8b73-41fb-9dfb-a120a44a97e0"],
+Cell[28769, 711, 161, 3, 29, "Input",ExpressionUUID->"d3b8654d-43a0-4617-88c2-c3df12f773d4"],
+Cell[28933, 716, 262, 6, 31, "Text",ExpressionUUID->"6a885f89-21dc-47ea-abe4-9eed598a72f7"],
+Cell[29198, 724, 454, 10, 84, "Subsubsection",ExpressionUUID->"f17c7da2-1553-419b-bfab-b8431746765e"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
