@@ -6,7 +6,7 @@ from collections import deque
 # -----------------------------
 TMax = 1200                     # Tiempo máximo de simulación (minutos)
 TM = 0                          # Tiempo actual del modelo
-n = 1500                         # Número máximo de pasajeros
+n = 500                         # Número máximo de pasajeros
 
 # Generación pseudoaleatoria de tiempos
 TI = [random.randint(1, 8) for _ in range(n)]        # Tiempos entre llegadas
